@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  notesapi: 
+    container_name: NotesAPI
+    build: ../ue2
+    volumes:
+      - notesvol:/data
+    networks:
+      - notesnet
+
+  noteswebapp:
+    container_name: NotesWebApp
+    build: .
+    networks:
+      - notesnet
+    ports:
+      - 80:80
+
+volumes:
+  notesvol:
+
+networks:
+  notesnet: 

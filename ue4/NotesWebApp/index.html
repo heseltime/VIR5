@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="ISO-8859-1">
+    <script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+    <title>Login</title>
+</head>
+
+<form onsubmit="login()" id="loginform">
+    <div>
+        <label>Username:</label>
+        <input type="text" name="username" />
+    </div>
+    <div>
+        <label>Password:</label>
+        <input type="password" name="password" />
+    </div>
+    <div>
+        <input type="submit" value="Log In" />
+    </div>
+</form>
+
+<script type="text/javascript">
+    $("#loginform").submit(function (e) {
+        e.preventDefault();
+    });
+
+    function setCookie(cname, cvalue) {
+        document.cookie = cname + "=" + cvalue + ";";
+    }
+
+    function login() {
+        var data = {
+            username: document.getElementsByName("username")[0].value,
+            password: document.getElementsByName("password")[0].value
+        }
+
+        var request = $
+            .ajax({
+                url: 'http://localhost/login',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                success: function (msg) {
+                    console.log('Success: ' + msg);
+                    setCookie('token', msg);
+                    window.location.href = 'http://localhost/notes.html';
+                },
+                error: function (msg) {                    
+                    window.alert('Error logging in');
+                }
+            });
+    }
+</script>
+
+</html>

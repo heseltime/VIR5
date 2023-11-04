@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  notesapi: 
+    container_name: NotesAPI
+    build: 
+      context: .
+      dockerfile: dockerfile2
+    volumes:
+      - notesvol:/data
+    networks:
+      - notesnet
+
+  noteswebapp:
+    container_name: NotesWebApp
+    build: 
+      context: .
+      dockerfile: dockerfile3
+    networks:
+      - notesnet
+    ports:
+      - 80:80
+
+  noteslogin:
+    container_name: NotesLogin
+    build: .
+    networks:
+      - notesnet
+    ports:
+      - 3000:3000
+
+
+volumes:
+  notesvol:
+
+networks:
+  notesnet: 

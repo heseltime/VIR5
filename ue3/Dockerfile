@@ -1,6 +1,7 @@
 FROM nginx:1.25.3
 
 COPY  ./NotesWebApp/ /usr/share/nginx/html
+COPY ./default.conf /etc/nginx/conf.d/default.conf
 
 
 # docker build -f webapp.Dockerfile -t exercise3-webapp:latest .
